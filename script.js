@@ -35,7 +35,14 @@ async function renderCourse(id) {
   
 
 }
-
+async function renderTableInfo() {
+  const course = await getAvailableCourses()
+  let table = document.getElementById('tableSection')
+  course.forEach(function (holes) {
+    table += `<tr><td>${holes}</td></tr>`
+  });
+  console.log(course)
+}
 function updateCourseSelected() {
   const selectElement = document.querySelector('#course-select');
   const id = selectElement.value;
@@ -64,6 +71,7 @@ function addLlist(){
 
 
 
+renderTableInfo();
 
 initialLoad();
 
@@ -76,5 +84,6 @@ class Player {
     this.scores = scores;
   }
 }
+
 // //============================================================================
 // toastr.success(`${playerName}, you are (L)PGA Tour material`)
