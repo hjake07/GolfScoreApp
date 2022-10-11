@@ -21,28 +21,50 @@ async function renderAvailableCourses() {
 async function renderCourse(id) {
   const course = await getCourse(id);
   const teeBoxes = course.holes.map(holeItem => holeItem.teeBoxes[0])
-  console.log(course)
+  let TheHoles = document.getElementById('holes')
+  let TheYardage = document.getElementById('yardage')
+  let ThePar = document.getElementById("par")
+  let Handicap = document.getElementById("handicap")
   let teeBoxSelectHtml = ''
-  course.holes.forEach(function(holeItem) {
+  let count = 0;
+ course.holes.forEach(function(holes){
+  TheHoles.innerHTML += `<td>${course.holes[count].hole}</td>`
+  count = count + 1;
+
+ })
     teeBoxes.forEach(function (teeBox, index) {
       teeBoxSelectHtml += `<option value="${index}">${teeBox.teeType.toUpperCase()}, ${teeBox.yards
         } yards</option>`
+  TheYardage.innerHTML += `<td>${teeBox.yards}</td>`
+  ThePar.innerHTML += `<td>${teeBox.par}</td>`
+  Handicap.innerHTML += `<td>${teeBox.hcp}</td>`
+        
     });
 
+    
+   
+  
+    
+
     document.getElementById('tee-box-select').innerHTML = teeBoxSelectHtml;
-  })
+    console.log(course)
+
+  
+ 
 
   
 
 }
-async function renderTableInfo() {
-  const course = await getAvailableCourses()
-  let table = document.getElementById('tableSection')
-  course.forEach(function (holes) {
-    table += `<tr><td>${holes}</td></tr>`
-  });
-  console.log(course)
-}
+// renderTableInfo();
+// async function renderTableInfo() {
+//   const course = await getAvailableCourses()
+//   course.holes.forEach(function() {
+//     table += `<td>${holes}</td>`
+//   });
+  
+
+// }
+
 function updateCourseSelected() {
   const selectElement = document.querySelector('#course-select');
   const id = selectElement.value;
@@ -71,7 +93,7 @@ function addLlist(){
 
 
 
-renderTableInfo();
+
 
 initialLoad();
 
