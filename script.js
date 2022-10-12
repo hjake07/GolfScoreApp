@@ -28,47 +28,41 @@ async function renderCourse(id) {
   let Handicap = document.getElementById("handicap")
   let teeBoxSelectHtml = ''
   let count = 0;
+  let totalYardsArray = [];
+  let totalParArray = [];
+  let totalHandicapArray = [];
   
  course.holes.forEach(function(holes){
   TheHoles.innerHTML += `<td>${course.holes[count].hole}</td>`
   count = count + 1;
 
  })
-    teeBoxes.forEach(function (teeBox, index) {
-      teeBoxSelectHtml += `<option value="${index}">${teeBox.teeType.toUpperCase()}, ${teeBox.yards
-        } yards</option>`
+  teeBoxes.forEach(function (teeBox, index) {
+  teeBoxSelectHtml += `<option value="${index}">${teeBox.teeType.toUpperCase()}, ${teeBox.yards} yards</option>`
   TheYardage.innerHTML += `<td>${teeBox.yards}</td>`
   ThePar.innerHTML += `<td>${teeBox.par}</td>`
   Handicap.innerHTML += `<td>${teeBox.hcp}</td>`
-    });
-teeBoxes.yards.forEach(function (yard, index) {
-  TheYardage.innerHTML += `<td>${yard.reduce(function callBackReduce(total, num){
+  totalYardsArray.push(teeBox.yards)
+  totalParArray.push(teeBox.par)
+  totalHandicapArray.push(teeBox.hcp)
+  });
+
+  let totalYards = totalYardsArray.reduce(TotalUp)
+  let totalPar = totalParArray.reduce(TotalUp);
+  let totalHCP = totalHandicapArray.reduce(TotalUp);
+
+  function TotalUp(total, num) {
     return total + num;
-      })}</td>`
-})
-    
-   
-  
-  
+  }
 
-    document.getElementById('tee-box-select').innerHTML = teeBoxSelectHtml;
+  TheYardage.innerHTML += `<th>${totalYards}</th>`
+  ThePar.innerHTML += `<th>${totalPar}</th>`
+  Handicap.innerHTML += `<th>${totalHCP}`
 
+
+  document.getElementById('tee-box-select').innerHTML = teeBoxSelectHtml;
   TheHoles.innerHTML += `<th>TOTAL</th>`
-  
- 
-
-  
-
 }
-// renderTableInfo();
-// async function renderTableInfo() {
-//   const course = await getAvailableCourses()
-//   course.holes.forEach(function() {
-//     table += `<td>${holes}</td>`
-//   });
-  
-
-// }
 
 function updateCourseSelected() {
   const selectElement = document.querySelector('#course-select');
@@ -92,16 +86,7 @@ function renderGolfCourseNames(courses) {
   });
   document.getElementById('course-select').innerHTML = courseOptionsHtml;
 }
-
-
-
-
-
-
 initialLoad();
-
-
-
 class Player {
   constructor(name, id = getNextId(), scores = []) {
     this.name = name;
@@ -112,3 +97,4 @@ class Player {
 
 // //============================================================================
 // toastr.success(`${playerName}, you are (L)PGA Tour material`)
+
