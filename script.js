@@ -94,7 +94,18 @@ class Player {
     this.scores = scores;
   }
 }
-
-// //============================================================================
+function getNextId() {
+  console.log('empty')
+}
+ function addList() {
+  console.log('test1')
+  let text = document.getElementById('new-list-name-input')
+  let table = document.getElementById('tableSection');
+  table.innerHTML += `<tr><th>${text.value}</th></tr>`
+  let Player2 = new Player(text.value)
+  console.log(Player2.name)
+  text.parentElement.remove();
+}
+  // //============================================================================
 // toastr.success(`${playerName}, you are (L)PGA Tour material`)
 
