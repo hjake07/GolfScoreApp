@@ -41,7 +41,11 @@ async function renderCourse(id) {
 
  })
   teeBoxes.forEach(function (teeBox, index) {
-  teeBoxSelectHtml += `<option value="${index}">${teeBox.teeType.toUpperCase()}, ${teeBox.yards} yards</option>`
+  teeBoxSelectHtml += `<option value="${index}"> PRO ${teeBox.yards} yards </option>`;
+  teeBoxSelectHtml += `<option value="${index}"> CHAMPION ${teeBox.yards} yards </option>`;
+  teeBoxSelectHtml += `<option value="${index}"> MEN ${teeBox.yards} yards </option>`;
+  teeBoxSelectHtml += `<option value="${index}"> WOMEN ${teeBox.yards} yards </option>`;
+
   TheYardage.innerHTML += `<td>${teeBox.yards}</td>`
   ThePar.innerHTML += `<td>${teeBox.par}</td>`
   Handicap.innerHTML += `<td>${teeBox.hcp}</td>`
@@ -70,6 +74,8 @@ function updateCourseSelected() {
   const id = selectElement.value;
 
   renderCourse(id)
+  
+
 }
 
 
