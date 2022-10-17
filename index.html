@@ -15,7 +15,7 @@
     <nav class="navbar navbar-light teal lighten-4">
 
         <!-- Navbar brand -->
-        <a class="navbar-brand" href="#">Golf Score App</a>
+        <a id="h1" class="navbar-brand" href="#">Golf Score App</a>
       
         <!-- Collapse button -->
         <button class="navbar-toggler toggler-example" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1"
@@ -65,14 +65,15 @@
                 <div class="table-responsive">
                   <div class="table-responsive">
                     <table id="tableSection" class="table table-bordered">
-                      <tr id = "holes"><th>Hole</th></tr>
-                      <tr id = "yardage"><th>Yardage</th></tr>
-                      <tr id = "par"><th>Par</th></tr>
-                      <tr id = "handicap"><th>Handicap</th></tr>
+                      <tr id = "holes"><th id="holeTh">Hole</th></tr>
+                      <tr id = "yardage"><th id="yardTh">Yardage</th></tr>
+                      <tr id = "par"><th id="parTh">Par</th></tr>
+                      <tr id = "handicap"><th id="handicapTh">Handicap</th></tr>
                     </table>
                 </div>
                 </div>
-                <div>
+                <div id ="emptyDiv"></div>
+                <div id="inputSection">
                   <input id="new-list-name-input" placeholder="Player Name">
                   <button class="btn btn-primary" onclick="addList()">New List</button>
                  </div>

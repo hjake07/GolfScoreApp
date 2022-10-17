@@ -1,4 +1,17 @@
 .teal {
     background-color: #005552;
 }
-
+#button {
+    background-color: #005552;
+    color: white;
+}
+#h1 {
+    color: white;
+}
+#tableSection {
+    border: 3px solid black;
+    background-color: rgb(249, 246, 246);
+}
+#parTh, #yardTh, #holeTh, #handicapTh, #totals{
+    border: 2px solid black;
+}
