@@ -23,7 +23,7 @@ async function renderAvailableCourses() {
 
 async function renderCourse(id) {
   const course = await getCourse(id);
-  console.log(course.holes)
+  console.log(course)
   const teeBoxes = course.holes.map(holeItem => holeItem.teeBoxes[0])
   let TheHoles = document.getElementById('holes')
   let TheYardage = document.getElementById('yardage')
@@ -34,6 +34,8 @@ async function renderCourse(id) {
   let totalYardsArray = [];
   let totalParArray = [];
   let totalHandicapArray = [];
+  let image = document.getElementById('imageSection')
+  image.innerHTML = `<img src=${course.thumbnail}>`
   
  course.holes.forEach(function(holes){
   TheHoles.innerHTML += `<td>${course.holes[count].hole}</td>`
@@ -45,7 +47,7 @@ async function renderCourse(id) {
   teeBoxSelectHtml += `<option value="${index}"> CHAMPION ${teeBox.yards} yards </option>`;
   teeBoxSelectHtml += `<option value="${index}"> MEN ${teeBox.yards} yards </option>`;
   teeBoxSelectHtml += `<option value="${index}"> WOMEN ${teeBox.yards} yards </option>`;
-
+console.log(teeBox.yards)
   TheYardage.innerHTML += `<td>${teeBox.yards}</td>`
   ThePar.innerHTML += `<td>${teeBox.par}</td>`
   Handicap.innerHTML += `<td>${teeBox.hcp}</td>`
@@ -56,13 +58,11 @@ async function renderCourse(id) {
 
   let totalYards = totalYardsArray.reduce(TotalUp)
   let totalPar = totalParArray.reduce(TotalUp);
-  let totalHCP = totalHandicapArray.reduce(TotalUp);
 
  
 
   TheYardage.innerHTML += `<th id="totals">${totalYards}</th>`
   ThePar.innerHTML += `<th id="totals">${totalPar}</th>`
-  Handicap.innerHTML += `<th id="totals">${totalHCP}`
 
 
   document.getElementById('tee-box-select').innerHTML = teeBoxSelectHtml;
@@ -77,7 +77,6 @@ function updateCourseSelected() {
   
 
 }
-
 
 async function initialLoad() {
   await renderAvailableCourses();
@@ -109,7 +108,7 @@ function getNextId() {
   let text = document.getElementById('new-list-name-input')
   let table = document.getElementById('tableSection');
   table.innerHTML += `<tr id="player1row"><th id="totals">${text.value}</th></tr>`
-  let Player2 = new Player(text.value, 1,)
+  var Player2 = new Player(text.value, 1,)
   console.log(Player2.name)
   text.parentElement.remove();
   let button = document.createElement('button');
@@ -122,7 +121,7 @@ function addList2(){
   let text = document.getElementById('new-list-name-input')
   let table = document.getElementById('tableSection');
   table.innerHTML += `<tr id="player2row"><th id="totals">${text.value}</th></tr>`
-  let Player3 = new Player(text.value, 1,)
+  let Player3 = new Player(text.value, 3,)
   console.log(Player3.name)
   text.parentElement.remove();
   let button = document.createElement('button');
@@ -220,7 +219,7 @@ function postScore3(){
     newLocation.innerHTML +=
     `<div id="inputSection">
     <input id="new-list-name-input" placeholder="Player Name">
-    <button class="btn btn-primary" onclick="addList4()">New List</button>
+    <button class="btn btn-primary" onclick="addList4()">New Player</button>
      </div>`
   document.getElementById('player3row').innerHTML += `<th id="totals">${p3Total}</th>`
 
@@ -255,7 +254,7 @@ function postScore2(){
     newLocation.innerHTML +=
     `<div id="inputSection">
     <input id="new-list-name-input" placeholder="Player Name">
-    <button class="btn btn-primary" onclick="addList3()">New List</button>
+    <button class="btn btn-primary" onclick="addList3()">New Player</button>
      </div>`
   document.getElementById('player2row').innerHTML += `<th id="totals">${p2Total}</th>`
 
@@ -275,14 +274,15 @@ function buttonClicked(){
 let p1Array = [];
 let p1ArrayNum = []
 function postScore(){
+
   let newLocation = document.getElementById('emptyDiv')
   let score = document.getElementById('scores')
-  document.getElementById('player1row').innerHTML += `<td>${scores.value}</td>`
-  p1Array.push(scores.value)
+  document.getElementById('player1row').innerHTML += `<td>${score.value}</td>`
+  p1Array.push(Number(score.value))
   let p1row = document.getElementById('player1row')
-  if(p1row.childElementCount == 19) {
+    if(p1row.childElementCount == 19) {
     for(let i = 0; i < p1Array.length; i++){
-      p1ArrayNum.push(Number(p1Array[i]))
+      p1ArrayNum.push(p1Array[i])
     }
     console.log(p1ArrayNum)
     let p1Total = p1ArrayNum.reduce(TotalUp)
@@ -291,11 +291,20 @@ function postScore(){
     newLocation.innerHTML +=
     `<div id="inputSection">
     <input id="new-list-name-input" placeholder="Player Name">
-    <button class="btn btn-primary" onclick="addList2()">New List</button>
+    <button class="btn btn-primary" onclick="addList2()">New Player</button>
      </div>`
   document.getElementById('player1row').innerHTML += `<th id="totals">${p1Total}</th>`
 
   }
+  // function nines(){
+  //   let outScore = p1Array.slice(0, 9)
+  //   let scoreOut = outScore.reduce(TotalUp)
+  //   let inScore = p1Array.slice(10, 19);
+  //   console.log(p1Array)
+
+    
+  // }
+  // nines();
 }
 
   // //============================================================================

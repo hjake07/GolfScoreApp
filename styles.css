@@ -6,7 +6,9 @@
     color: white;
 }
 #h1 {
+    border: 1px solid white;
     color: white;
+    padding: 0 5px;
 }
 #tableSection {
     border: 3px solid black;
@@ -14,4 +16,30 @@
 }
 #parTh, #yardTh, #holeTh, #handicapTh, #totals{
     border: 2px solid black;
+}
+img {
+    margin-top: 10px;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-bottom: 20px;
+    width: 50%;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+.mauto {
+    margin: 0 auto;
+    font-weight: 100;
+    text-decoration: underline;
+    display: flex;
+    width: fit-content;
+}
+.mauto:hover {
+    font-weight: 500;
+    cursor: pointer;
+}
+body {
+    background-color: #a1cbca;
+}
+.container {
+    background-color: white;
 }
