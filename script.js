@@ -47,10 +47,11 @@ async function renderCourse(id) {
   
  course.holes.forEach(function(holes){
   TheHoles.innerHTML += `<td>${course.holes[count].hole}</td>`
-  count = count + 1;
+  count++;
 
  })
   teeBoxes.forEach(function (teeBox, index) {
+    console.log(teeBox.teeType)
  
   teeBoxSelectHtml += `<option value="${index}"> PRO ${teeBox.yards} yards </option>`;
   teeBoxSelectHtml += `<option value="${index}"> CHAMPION ${teeBox.yards} yards </option>`;
