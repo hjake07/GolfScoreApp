@@ -29,6 +29,12 @@ async function renderCourse(id) {
   let TheYardage = document.getElementById('yardage')
   let ThePar = document.getElementById("par")
   let Handicap = document.getElementById("handicap")
+  let champion = document.getElementById('champion');
+  let men = document.getElementById('men');
+  let women = document.getElementById('women')
+  champion.innerHTML = '';
+  men.innerHTML = '';
+  women.innerHTML = '';
   let teeBoxSelectHtml = ''
   TheHoles.innerHTML = "";
   TheYardage.innerHTML = "";
@@ -44,25 +50,50 @@ async function renderCourse(id) {
   let totalHandicapArray = [];
   let image = document.getElementById('imageSection')
   image.innerHTML = `<img src=${course.thumbnail}>`
-  
- course.holes.forEach(function(holes){
+  console.log(course.holes)
+ course.holes.forEach(function(holes, index){
   TheHoles.innerHTML += `<td>${course.holes[count].hole}</td>`
   count++;
-
+console.log(holes.teeBoxes[1].yards)
+if(champion.checked){
+  TheYardage.innerHTML += `<td>${holes.teeBoxes[1].yards}</td>`
+  ThePar.innerHTML += `<td>${holes.teeBoxes[1].par}</td>`
+  Handicap.innerHTML += `<td>${holes.teeBoxes[1].hcp}</td>`
+}
+else if(men.checked){
+  TheYardage.innerHTML += `<td>${holes.teeBoxes[2].yards}</td>`
+  ThePar.innerHTML += `<td>${holes.teeBoxes[2].par}</td>`
+  Handicap.innerHTML += `<td>${holes.teeBoxes[2].hcp}</td>`
+}
+else if(women.checked){
+  TheYardage.innerHTML += `<td>${holes.teeBoxes[3].yards}</td>`
+  ThePar.innerHTML += `<td>${holes.teeBoxes[3].par}</td>`
+  Handicap.innerHTML += `<td>${holes.teeBoxes[3].hcp}</td>`
+}
+else if(teeBoxSelectHtml.checked){
+  TheYardage.innerHTML += `<td>${holes.teeBoxes[0].yards}</td>`
+  ThePar.innerHTML += `<td>${holes.teeBoxes[0].par}</td>`
+  Handicap.innerHTML += `<td>${holes.teeBoxes[0].hcp}</td>`
+}
+else {
+  console.log('error')
+}
  })
   teeBoxes.forEach(function (teeBox, index) {
-    console.log(teeBox.teeType)
- 
-  teeBoxSelectHtml += `<option value="${index}"> PRO ${teeBox.yards} yards </option>`;
-  teeBoxSelectHtml += `<option value="${index}"> CHAMPION ${teeBox.yards} yards </option>`;
-  teeBoxSelectHtml += `<option value="${index}"> MEN ${teeBox.yards} yards </option>`;
-  teeBoxSelectHtml += `<option value="${index}"> WOMEN ${teeBox.yards} yards </option>`;
+    console.log(teeBox.yards)
+
+   
+
   TheYardage.innerHTML += `<td>${teeBox.yards}</td>`
   ThePar.innerHTML += `<td>${teeBox.par}</td>`
   Handicap.innerHTML += `<td>${teeBox.hcp}</td>`
   totalYardsArray.push(teeBox.yards)
   totalParArray.push(teeBox.par)
   totalHandicapArray.push(teeBox.hcp)
+ 
+ 
+ 
+  
   });
 
   let totalYards = totalYardsArray.reduce(TotalUp)
@@ -72,7 +103,6 @@ async function renderCourse(id) {
 
   TheYardage.innerHTML += `<th id="totals">${totalYards}</th>`
   ThePar.innerHTML += `<th id="totals">${totalPar}</th>`
-
 
   document.getElementById('tee-box-select').innerHTML = teeBoxSelectHtml;
   TheHoles.innerHTML += `<th id="totals">TOTAL</th>`
@@ -178,7 +208,7 @@ function addList2(){
   let text = document.getElementById('new-list-name-input')
   let table = document.getElementById('tableSection');
   table.innerHTML += `<tr id="player2row"><th id="totals">${text.value}</th></tr>`
-  let Player3 = new Player(text.value, 3,)
+  let Player3 = new Player(text.value, 2,)
   console.log(Player3.name)
   text.parentElement.remove();
   let button = document.createElement('button');
@@ -191,7 +221,7 @@ function addList3(){
   let text = document.getElementById('new-list-name-input')
   let table = document.getElementById('tableSection');
   table.innerHTML += `<tr id="player3row"><th id="totals">${text.value}</th></tr>`
-  let Player4 = new Player(text.value, 1,)
+  let Player4 = new Player(text.value, 3,)
   console.log(Player4.name)
   text.parentElement.remove();
   let button = document.createElement('button');
@@ -204,7 +234,7 @@ function addList4(){
   let text = document.getElementById('new-list-name-input')
   let table = document.getElementById('tableSection');
   table.innerHTML += `<tr id="player4row"><th id="totals">${text.value}</th></tr>`
-  let Player5 = new Player(text.value, 1,)
+  let Player5 = new Player(text.value, 4,)
   console.log(Player5.name)
   text.parentElement.remove();
   let button = document.createElement('button');
@@ -415,7 +445,6 @@ function postScore(){
  
 
 }
-
   // //============================================================================
 // toastr.success(`${playerName}, you are (L)PGA Tour material`)
 
