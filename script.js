@@ -23,7 +23,6 @@ async function renderAvailableCourses() {
 
 async function renderCourse(id) {
   const course = await getCourse(id);
-  console.log(course)
   const teeBoxes = course.holes.map(holeItem => holeItem.teeBoxes[0])
   let TheHoles = document.getElementById('holes')
   let TheYardage = document.getElementById('yardage')
@@ -50,27 +49,50 @@ async function renderCourse(id) {
   let totalHandicapArray = [];
   let image = document.getElementById('imageSection')
   image.innerHTML = `<img src=${course.thumbnail}>`
-  console.log(course.holes)
  course.holes.forEach(function(holes, index){
   TheHoles.innerHTML += `<td>${course.holes[count].hole}</td>`
   count++;
-console.log(holes.teeBoxes[1].yards)
 if(champion.checked){
+  console.log(holes.teeBoxes[1].yards,holes.teeBoxes[1].par,holes.teeBoxes[1].hcp)
+  TheYardage.innerHTML = ''
+  ThePar.innerHTML = ''
+  Handicap.innerHTML = ''
+  TheYardage.innerHTML += `<th id="yardTh">Yards</th>`
+  ThePar.innerHTML += `<th id="parTh">Par</th>`
+  Handicap.innerHTML += `<th id="handicapTh">Handicap</th>`
   TheYardage.innerHTML += `<td>${holes.teeBoxes[1].yards}</td>`
   ThePar.innerHTML += `<td>${holes.teeBoxes[1].par}</td>`
   Handicap.innerHTML += `<td>${holes.teeBoxes[1].hcp}</td>`
 }
 else if(men.checked){
+  TheYardage.innerHTML = ''
+  ThePar.innerHTML = ''
+  Handicap.innerHTML = ''
+  TheYardage.innerHTML += `<th id="yardTh">Yards</th>`
+  ThePar.innerHTML += `<th id="parTh">Par</th>`
+  Handicap.innerHTML += `<th id="handicapTh">Handicap</th>`
   TheYardage.innerHTML += `<td>${holes.teeBoxes[2].yards}</td>`
   ThePar.innerHTML += `<td>${holes.teeBoxes[2].par}</td>`
   Handicap.innerHTML += `<td>${holes.teeBoxes[2].hcp}</td>`
 }
 else if(women.checked){
+  TheYardage.innerHTML = ''
+  ThePar.innerHTML = ''
+  Handicap.innerHTML = ''
+  TheYardage.innerHTML += `<th id="yardTh">Yards</th>`
+  ThePar.innerHTML += `<th id="parTh">Par</th>`
+  Handicap.innerHTML += `<th id="handicapTh">Handicap</th>`
   TheYardage.innerHTML += `<td>${holes.teeBoxes[3].yards}</td>`
   ThePar.innerHTML += `<td>${holes.teeBoxes[3].par}</td>`
   Handicap.innerHTML += `<td>${holes.teeBoxes[3].hcp}</td>`
 }
 else if(teeBoxSelectHtml.checked){
+  TheYardage.innerHTML = ''
+  ThePar.innerHTML = ''
+  Handicap.innerHTML = ''
+  TheYardage.innerHTML += `<th id="yardTh">Yards</th>`
+  ThePar.innerHTML += `<th id="parTh">Par</th>`
+  Handicap.innerHTML += `<th id="handicapTh">Handicap</th>`
   TheYardage.innerHTML += `<td>${holes.teeBoxes[0].yards}</td>`
   ThePar.innerHTML += `<td>${holes.teeBoxes[0].par}</td>`
   Handicap.innerHTML += `<td>${holes.teeBoxes[0].hcp}</td>`
@@ -80,7 +102,6 @@ else {
 }
  })
   teeBoxes.forEach(function (teeBox, index) {
-    console.log(teeBox.yards)
 
    
 
@@ -120,7 +141,6 @@ else {
     let outYardage = document.createElement('th');
     outYardage.setAttribute('id', 'outYardage');
     let yardDummyArray = totalYardsArray.slice(0, 9)
-    console.log(yardDummyArray)
     let outYardageTotal = yardDummyArray.reduce(TotalUp)
     outYardage.innerHTML = outYardageTotal;
     TheYardage.insertBefore(outYardage, TheYardage.childNodes[10])
@@ -187,11 +207,8 @@ class Player {
     this.scores = scores;
   }
 }
-function getNextId() {
-  console.log('empty')
-}
+
  function addList() {
-  console.log('test1')
   let text = document.getElementById('new-list-name-input')
   let table = document.getElementById('tableSection');
   table.innerHTML += `<tr id="player1row"><th id="totals">${text.value}</th></tr>`
@@ -273,7 +290,6 @@ function postScore4(){
     for(let i = 0; i < p4Array.length; i++){
       p4ArrayNum.push(Number(p4Array[i]))
     }
-    console.log(p4ArrayNum)
     let p4Total = p4ArrayNum.reduce(TotalUp)
     document.getElementById('button').remove();
     document.getElementById('scores').parentNode.remove();
@@ -321,7 +337,6 @@ function postScore3(){
     for(let i = 0; i < p3Array.length; i++){
       p3ArrayNum.push(Number(p3Array[i]))
     }
-    console.log(p3ArrayNum)
     let p3Total = p3ArrayNum.reduce(TotalUp)
     document.getElementById('button').remove();
     document.getElementById('scores').parentNode.remove();
@@ -371,7 +386,6 @@ function postScore2(){
     for(let i = 0; i < p2Array.length; i++){
       p2ArrayNum.push(Number(p2Array[i]))
     }
-    console.log(p2ArrayNum)
     let p2Total = p2ArrayNum.reduce(TotalUp)
     document.getElementById('button').remove();
     document.getElementById('scores').parentNode.remove();
@@ -423,7 +437,6 @@ function postScore(){
     for(let i = 0; i < p1Array.length; i++){
       p1ArrayNum.push(p1Array[i])
     }
-    console.log(p1ArrayNum)
     let p1Total = p1ArrayNum.reduce(TotalUp)
     document.getElementById('button').remove();
     document.getElementById('scores').parentNode.remove();
