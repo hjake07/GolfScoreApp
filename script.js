@@ -52,8 +52,8 @@ async function renderCourse(id) {
  course.holes.forEach(function(holes, index){
   TheHoles.innerHTML += `<td>${course.holes[count].hole}</td>`
   count++;
+////////////////////////////////////////////////////////////////////////////////////////
 if(champion.checked){
-  console.log(holes.teeBoxes[1].yards,holes.teeBoxes[1].par,holes.teeBoxes[1].hcp)
   TheYardage.innerHTML = ''
   ThePar.innerHTML = ''
   Handicap.innerHTML = ''
@@ -63,7 +63,15 @@ if(champion.checked){
   TheYardage.innerHTML += `<td>${holes.teeBoxes[1].yards}</td>`
   ThePar.innerHTML += `<td>${holes.teeBoxes[1].par}</td>`
   Handicap.innerHTML += `<td>${holes.teeBoxes[1].hcp}</td>`
-}
+  totalYardsArray = []
+  totalParArray = []
+  //--------------------------------------------------------
+totalYardsArray.push(holes.teeBoxes[1].yards)
+totalParArray.push(holes.teeBoxes[1].yards)
+totalYardsArray.pop();
+totalParArray.pop(); 
+} 
+////////////////////////////////////////////////////////////////////////////////////////
 else if(men.checked){
   TheYardage.innerHTML = ''
   ThePar.innerHTML = ''
@@ -74,7 +82,15 @@ else if(men.checked){
   TheYardage.innerHTML += `<td>${holes.teeBoxes[2].yards}</td>`
   ThePar.innerHTML += `<td>${holes.teeBoxes[2].par}</td>`
   Handicap.innerHTML += `<td>${holes.teeBoxes[2].hcp}</td>`
+  totalYardsArray = []
+  totalParArray = []
+  //--------------------------------------------------------
+  totalYardsArray.push(holes.teeBoxes[2].yards)
+totalParArray.push(holes.teeBoxes[2].yards)
+totalYardsArray.pop();
+totalParArray.pop(); 
 }
+////////////////////////////////////////////////////////////////////////////////////////
 else if(women.checked){
   TheYardage.innerHTML = ''
   ThePar.innerHTML = ''
@@ -85,7 +101,15 @@ else if(women.checked){
   TheYardage.innerHTML += `<td>${holes.teeBoxes[3].yards}</td>`
   ThePar.innerHTML += `<td>${holes.teeBoxes[3].par}</td>`
   Handicap.innerHTML += `<td>${holes.teeBoxes[3].hcp}</td>`
+  totalYardsArray = []
+  totalParArray = []
+  //--------------------------------------------------------
+  totalYardsArray.push(holes.teeBoxes[3].yards)
+totalParArray.push(holes.teeBoxes[3].yards)
+totalYardsArray.pop();
+totalParArray.pop(); 
 }
+////////////////////////////////////////////////////////////////////////////////////////
 else if(teeBoxSelectHtml.checked){
   TheYardage.innerHTML = ''
   ThePar.innerHTML = ''
@@ -96,7 +120,13 @@ else if(teeBoxSelectHtml.checked){
   TheYardage.innerHTML += `<td>${holes.teeBoxes[0].yards}</td>`
   ThePar.innerHTML += `<td>${holes.teeBoxes[0].par}</td>`
   Handicap.innerHTML += `<td>${holes.teeBoxes[0].hcp}</td>`
+  totalYardsArray = []
+  totalParArray = []
+  //--------------------------------------------------------
+  totalYardsArray.push(holes.teeBoxes[0].yards)
+totalParArray.push(holes.teeBoxes[0].yards)
 }
+////////////////////////////////////////////////////////////////////////////////////////
 else {
   console.log('error')
 }
@@ -116,7 +146,7 @@ else {
  
   
   });
-
+  console.log(totalYardsArray)
   let totalYards = totalYardsArray.reduce(TotalUp)
   let totalPar = totalParArray.reduce(TotalUp);
 
@@ -127,6 +157,7 @@ else {
 
   document.getElementById('tee-box-select').innerHTML = teeBoxSelectHtml;
   TheHoles.innerHTML += `<th id="totals">TOTAL</th>`
+
   function nines(){
     let out = document.createElement('th');
     out.setAttribute('id', 'out')
@@ -173,6 +204,7 @@ else {
     Handicap.innerHTMl += `<th id="inHandicap"></th>`
     Handicap.innerHTML += `<th id="totalHandicap"></th>`
   }
+  
   nines();
 }
 
